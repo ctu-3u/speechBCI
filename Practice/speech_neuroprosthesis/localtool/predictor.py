@@ -208,7 +208,7 @@ def examine_classifiers(feature1, label1, feature2, label2, filename, \
     df = pd.DataFrame(dataframe)
     df.to_excel(filename, index = False)
 
-    return accuracylists
+    return accuracylists.T
 
 
 
