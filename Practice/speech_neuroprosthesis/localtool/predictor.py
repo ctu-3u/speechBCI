@@ -35,11 +35,17 @@ def optimize_transformation(X_source, X_target, label_source, label_target, lamb
     # - X_target: Target dataset (N, d)
     # - label1: phoneme labels for arrays in X_source
     # - label2: phoneme labels for arrays in X_target
+    # intermediate:
+    # - \tilde{X} W_{trans} = Y
     # Returns:
     # - Optimal affine transformation matrix A and translation vector b
-    d = X_source.shape[1] # TODO: what if X_source and X_target have different size 0?
-
     conds = np.unique(label_source)
+    conds_2 = np.unique(label_target)
+    if np.any(conds != conds_2):
+        raise Exception("Source samples and target samples should have the same labels.")
+
+
+    d = X_source.shape[1] # TODO: what if X_source and X_target have different size 0?
 
     X_tild = np.ones((len(conds), d + 1))
     Y_tild = np.ones((len(conds), d))
